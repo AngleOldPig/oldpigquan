@@ -1,0 +1,29 @@
+/* pages/load/load.wxss */
+
+.load_avatar{
+  width: 60%;
+  height: 400rpx;
+  margin-top: 170rpx;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.load_nickName{
+  align-content: center;
+  text-align: center;
+  margin-top: 70rpx;
+  font-size: 50rpx;
+  font-weight: bold;
+}
+
+.load_button{
+  width: 60%;
+  height: 110rpx;
+  margin-top: 110rpx;
+  margin-left: 20%;
+  margin-right: 20%;
+  background: #3ec03c;
+  /*微信专用绿：#04be01*/
+  color: #FFFFFF;
+  border-radius: 22rpx;
+}
