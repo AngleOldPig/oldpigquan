@@ -1,13 +1,14 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/enroll/enroll",
     "pages/load/load",
-    "pages/login/login",
     "pages/square/square",
     "pages/mine/mine",
     "pages/commit/commit",
     "pages/bottom_menu/bottom_menu",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

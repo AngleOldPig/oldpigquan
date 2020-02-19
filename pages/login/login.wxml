@@ -1,2 +1,13 @@
 <!--pages/login/login.wxml-->
-<text>pages/login/login.wxml</text>
+<view class="background">
+  <view class='firstInput'>
+    <input placeholder="用户名" placeholder-class="hintFont" class="input" type="text" bindinput="usernameInput"></input>
+  </view>
+  <view class='secondInput'>
+    <input placeholder="登陆密码" placeholder-class="hintFont" class="input" type="password" bindinput="passwordInput"></input>
+  </view>
+  <view class="click" bindtap="signIn">登录</view>
+  <view class="signUp">
+    <text class="clickMe" bindtap="signUp">还没有账号？点我登录</text>
+  </view>
+</view>
