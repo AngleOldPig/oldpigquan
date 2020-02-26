@@ -60,14 +60,14 @@ page {
 }
 
 .showname{
-  font-size: 34rpx;
+  font-size: 37rpx;
   color: #3f51b5;
   font-family: PingFangSC-regular;
   font-weight: bold;
 }
 
 .showtime{
-  font-size: 26rpx;
+  font-size: 28rpx;
   color: #5e5d5d;
   font-family: PingFangSC-regular;
 }
@@ -77,12 +77,13 @@ page {
   margin-left: 4%;
   margin-right: 4%;
   padding-bottom: 20rpx;
-  border-bottom: 5rpx solid #bbbbbb;
+  border-bottom: 3rpx solid #bbbbbb;
 }
 
 .content{
   font-size: 32rpx;
   color: #101010;
+  word-break: break-all;
 }
 
 .thirdblock{

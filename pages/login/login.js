@@ -9,13 +9,13 @@ Page({
     password: "",
   },
 
-  signUp: function (e) {
+  signUp: function(e) {
     wx.navigateTo({
       url: '/pages/enroll/enroll',
     })
   },
 
-  signIn: function (e) {
+  signIn: function(e) {
     var that = this
     //检查内容是否填全
     if (that.data.username == '') {
@@ -31,8 +31,7 @@ Page({
           // }
         }
       })
-    }
-    else if (that.data.password == '') {
+    } else if (that.data.password == '') {
       wx.showModal({
         title: '乖~ 告诉我密码',
         content: '快把登录密码填上',
@@ -45,74 +44,77 @@ Page({
           // }
         }
       })
-    }
-    
-    else {
+    } else {
       console.log("success")
+
+      wx.redirectTo({
+        url: '/pages/square/square',
+      })
+
     }
   },
 
-  usernameInput: function (e) {
+  usernameInput: function(e) {
     this.data.username = e.detail.value
   },
 
-  passwordInput: function (e) {
+  passwordInput: function(e) {
     this.data.password = e.detail.value
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

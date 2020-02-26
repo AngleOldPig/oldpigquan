@@ -1,25 +1,27 @@
 <!--pages/square/square.wxml-->
 <scroll-view class="scbg" scroll-y='true'>
-  <view class="box">
-    <view class="firstblock">
-      <image class="face"></image>
-      <view class="user">
-        <view class="name">
-          <text class="showname"></text>
-        </view>
-        <view class="time">
-          <text class="showtime"></text>
+  <block wx:for="{{list}}" wx:for-item="itemName" wx:for-index="id">
+    <view class="box">
+      <view class="firstblock">
+        <image class="face" src="{{itemName.face_url}}"></image>
+        <view class="user">
+          <view class="name">
+            <text class="showname">{{itemName.username}}</text>
+          </view>
+          <view class="time">
+            <text class="showtime">{{itemName.send_timestamp}}</text>
+          </view>
         </view>
       </view>
+      <view class="secondblock">
+        <text class="content">{{itemName.content}}</text>
+      </view>
+      <view class="thirdblock">
+        <image class="like" src='/images/like_dark.png'></image>
+        <text class="likenumber">{{itemName.total_likes}}</text>
+      </view>
     </view>
-    <view class="secondblock">
-      <text class="content"></text>
-    </view>
-    <view class="thirdblock">
-      <image class="like"></image>
-      <text class="likenumber"></text>
-    </view>
-  </view>
+  </block>
 </scroll-view>
 
 <include src="/pages/bottom_menu/bottom_menu" />

@@ -1,2 +1,39 @@
 <!--pages/mine/mine.wxml-->
-<text>pages/mine/mine.wxml</text>
+
+<scroll-view class="scbg" scroll-y='true'>
+  <view class="userInfo">
+    <view class="load_avatar">
+      <open-data class="avatar" type="userAvatarUrl"></open-data>
+    </view>
+    <view class="load_nickName">
+      <open-data class="nickname" type="userNickName"></open-data>
+    </view>
+  </view>
+
+  <block wx:for="{{list}}" wx:for-item="itemName" wx:for-index="id">
+    
+    <view class="box">
+
+      <view class="firstblock">
+      <text class="content">{{itemName.content}}</text>
+        
+      </view>
+
+      <view class="secondblock">
+        <view class="time">
+          <text class="showtime">{{itemName.send_timestamp}}</text>
+        </view>
+      </view>
+
+      <view class="thirdblock">
+        <image class="like" src='/images/like_dark.png'></image>
+        <text class="likenumber">{{itemName.total_likes}}</text>
+        <view class='del'>删除</view>
+      </view>
+
+    </view>
+
+  </block>
+</scroll-view>
+
+<include src="/pages/bottom_menu/bottom_menu" />

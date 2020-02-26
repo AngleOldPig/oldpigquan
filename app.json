@@ -1,14 +1,12 @@
 {
   "pages": [
+    "pages/mine/mine",
     "pages/square/square",
     "pages/bottom_menu/bottom_menu",
     "pages/commit/commit",
     "pages/login/login",
     "pages/enroll/enroll",
     "pages/load/load",
-    
-    "pages/mine/mine",
-    
     "pages/logs/logs",
     "pages/index/index"
   ],
