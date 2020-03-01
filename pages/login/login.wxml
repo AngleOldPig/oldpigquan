@@ -1,7 +1,7 @@
 <!--pages/login/login.wxml-->
 <view class="background">
   <view class='firstInput'>
-    <input placeholder="用户名" placeholder-class="hintFont" class="input" type="text" bindinput="usernameInput"></input>
+    <input placeholder="手机号" placeholder-class="hintFont" class="input" type="text" bindinput="phonenumberInput"></input>
   </view>
   <view class='secondInput'>
     <input placeholder="登陆密码" placeholder-class="hintFont" class="input" type="password" bindinput="passwordInput"></input>

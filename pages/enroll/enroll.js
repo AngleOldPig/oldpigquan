@@ -132,58 +132,58 @@ Page({
           //console.log(res.data)
           if (res.data.error_code == 1.1) {
             wx.showModal({
-              title: '1来者何人？报上名来！',
+              title: '来者何人？报上名来！',
               content: '快把名字填上',
               showCancel: false,
               success(res) {}
             })
           } else if (res.data.error_code == 1.2) {
             wx.showModal({
-              title: '1给个手机号呗',
+              title: '给个手机号呗',
               content: '快把手机号填上',
               showCancel: false,
               success(res) {}
             })
           } else if (res.data.error_code == 1.3) {
             wx.showModal({
-              title: '1乖~ 告诉我密码',
+              title: '乖~ 告诉我密码',
               content: '快把登录密码填上',
               showCancel: false,
               success(res) {}
             })
           } else if (res.data.error_code == 1.4) {
             wx.showModal({
-              title: '1休想偷懒！',
+              title: '休想偷懒！',
               content: '在确认密码里再输入一遍密码，让我来看看你记住了没',
               showCancel: false,
               success(res) {}
             })
           } else if (res.data.error_code == 2) {
             wx.showModal({
-              title: '1？？？',
+              title: '？？？',
               content: '两次输入密码不一致，快回去检查',
               showCancel: false,
               success(res) {}
             })
           } else if (res.data.error_code == 3) {
             wx.showModal({
-              title: '1你到底是谁？？',
+              title: '你到底是谁？？',
               content: '手机号已被注册',
               showCancel: false,
               success(res) {}
             })
           } else if (res.data.error_code != 0) {
             wx.showModal({
-              title: '1？？？',
+              title: '？？？',
               content: '遇到神秘错误:' + res.data.msg + '，快通知老猪！',
               showCancel: false,
               success(res) {},
             })
           } else if (res.data.error_code == 0){
             getApp().globalData.user = res.data.data
-            console.log(getApp().globalData.user)
+            //console.log(getApp().globalData.user)
             wx.showModal({
-              title: '1注册成功',
+              title: '注册成功',
               content: '慢点按确定，给老猪留点时间帮你清理缓存',
               showCancel: false,
               success(res) {},

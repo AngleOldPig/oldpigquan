@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    username: "",
+    phonenumber: "",
     password: "",
   },
 
@@ -18,10 +18,10 @@ Page({
   signIn: function(e) {
     var that = this
     //检查内容是否填全
-    if (that.data.username == '') {
+    if (that.data.phonenumber == '') {
       wx.showModal({
-        title: '来者何人？报上名来！',
-        content: '快把名字填上',
+        title: '来者何人？',
+        content: '快把手机号填上',
         showCancel: false,
         success(res) {
           // if (res.confirm) {
@@ -34,7 +34,7 @@ Page({
     } else if (that.data.password == '') {
       wx.showModal({
         title: '乖~ 告诉我密码',
-        content: '快把登录密码填上',
+        content: '快把登录密码也填上',
         showCancel: false,
         success(res) {
           // if (res.confirm) {
@@ -46,16 +46,76 @@ Page({
       })
     } else {
       console.log("success")
+      wx.request({
+        url: getApp().globalData.server + '/index.php/home/user/signin',
+        data: {
+          phone: that.data.phonenumber,
+          password: that.data.password,
+        },
 
-      wx.redirectTo({
-        url: '/pages/square/square',
+        method: "POST",
+        header: {
+          'content-type': "application/x-www-form-urlencoded"
+        },
+        success(res) {
+          //console.log(res.data)
+          if (res.data.error_code == 1.1) {
+            wx.showModal({
+              title: '来者何人？',
+              content: '快把手机号填上',
+              showCancel: false,
+              success(res) {}
+            })
+          } else if (res.data.error_code == 1.2) {
+            wx.showModal({
+              title: '乖~ 告诉我密码',
+              content: '快把登录密码也填上',
+              showCancel: false,
+              success(res) {}
+            })
+          } else if (res.data.error_code == 3) {
+            wx.showModal({
+              title: '密码错啦！',
+              content: '那我就再问一遍',
+              showCancel: false,
+              success(res) {}
+            })
+          } else if (res.data.error_code == 2) {
+            wx.showModal({
+              title: '你到底是谁？？',
+              content: '不存在该手机用户，请注册',
+              showCancel: false,
+              success(res) {}
+            })
+          } else if (res.data.error_code != 0) {
+            wx.showModal({
+              title: '？？？',
+              content: '遇到神秘错误:' + res.data.msg + '，快通知老猪！',
+              showCancel: false,
+              success(res) {},
+            })
+          } else if (res.data.error_code == 0) {
+            getApp().globalData.user = res.data.data
+            //console.log(getApp().globalData.user)
+            wx.showModal({
+              title: '登录成功',
+              content: '慢点按确定，给老猪留点时间帮你清理缓存',
+              showCancel: false,
+              success(res) {},
+              complete: function(res) {
+                wx.reLaunch({
+                  url: '/pages/square/square'
+                })
+              }
+            })
+          }
+        }
       })
-
     }
   },
 
-  usernameInput: function(e) {
-    this.data.username = e.detail.value
+  phonenumberInput: function(e) {
+    this.data.phonenumber = e.detail.value
   },
 
   passwordInput: function(e) {
