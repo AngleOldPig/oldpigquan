@@ -113,6 +113,7 @@ Page({
         }
       })
     } else {
+      //console.log(that.data.username)
       wx.request({
         url: getApp().globalData.server + '/index.php/home/user/signup',
         data: {
@@ -125,11 +126,10 @@ Page({
         
         method: "POST",
         header: {
-          'content-type': "application/x-www-from-urlencoded"
+          'content-type': "application/x-www-form-urlencoded"
         },
         success(res) {
-          console.log(getApp().globalData.server + '/index.php/home/user/signup')
-          console.log(res.data)
+          //console.log(res.data)
           if (res.data.error_code == 1.1) {
             wx.showModal({
               title: '1来者何人？报上名来！',
