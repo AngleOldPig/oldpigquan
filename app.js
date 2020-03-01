@@ -1,6 +1,6 @@
 //app.js
 App({
-  onLaunch: function () {
+  onLaunch: function() {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
@@ -34,7 +34,8 @@ App({
     })
   },
   globalData: {
-    user:{}, //后台返回用户全部信息
+    user: {}, //后台返回用户全部信息
     userInfo: {}, //微信获取用户信息
+    server: 'https://oldpigclub.applinzi.com',
   }
 })
