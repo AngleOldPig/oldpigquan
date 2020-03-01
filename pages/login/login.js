@@ -109,6 +109,14 @@ Page({
               }
             })
           }
+        },
+        fail: function (res) {
+          wx.showModal({
+            title: '糟糕',
+            content: '服务器傲娇了，请检查网络状态并督促老猪调教服务器',
+            showCancel: false,
+            success(res) { },
+          })
         }
       })
     }
