@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    detail: "",
+    detail: "", // 消息内容
   },
 
   bindTextAreaBlur: function(e) {
@@ -24,10 +24,58 @@ Page({
     console.log(that.data.detail)
 
     //与服务器交互
+    wx.request({
+      url: getApp().globalData.server + '/index.php/home/message/publish_new_message',
+      data: {
+        user_id: getApp().globalData.user.user_id,
+        username: getApp().globalData.user.username,
+        face_url: getApp().globalData.user.face_url,
+        content: that.data.detail,
+      },
 
-    setTimeout(function(){
-      wx.hideLoading()
-    },2000)
+      method: "POST",
+      header: {
+        'content-type': "application/x-www-form-urlencoded"
+      },
+      success(res) {
+        //console.log(res.data)
+        if (res.data.error_code != 0) {
+          wx.showModal({
+            title: '？？？',
+            content: '遇到神秘错误: 代号' + res.data.error_code+': '+res.data.msg + '，快通知老猪！',
+            showCancel: false,
+            success(res) { },
+          })
+        } else if (res.data.error_code == 0) {
+          wx.showModal({
+            title: '发布成功',
+            content: '慢点按确定，给老猪留点时间帮你清理缓存',
+            showCancel: false,
+            success(res) { },
+            complete: function (res) {
+              wx.reLaunch({
+                url: '/pages/square/square'
+              })
+            }
+          })
+        }
+      },
+      fail: function (res) {
+        wx.showModal({
+          title: '糟糕',
+          content: '服务器傲娇了，请检查网络状态并督促老猪调教服务器',
+          showCancel: false,
+          success(res) { },
+        })
+      },
+      complete:function(res){
+        wx.hideLoading()
+      }
+    })
+
+    // setTimeout(function(){
+    //   wx.hideLoading()
+    // },2000)
   },
 
   /**

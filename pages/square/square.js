@@ -7,35 +7,56 @@ Page({
   data: {
     firstcolor: "#000000",
     secondcolor: "#979797",
-    list: [{
-        face_url: "/images/new.png",
-        username: "AOP",
-        send_timestamp: "2020-2-26 21:31",
-        content: "just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. ",
-        total_likes: 32,
+    showdata: {},
+  },
+
+  like: function(e) {
+    wx.request({
+      url: getApp().globalData.server + '/index.php/home/message/do_like',
+      data: {
+        user_id: getApp().globalData.user.user_id,
+        message_id: getApp().globalData.user.username,
       },
-      {
-        face_url: "/images/like_dark.png",
-        username: "AOQ",
-        send_timestamp: "2020-2-26 21:33",
-        content: "just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. 22222222222",
-        total_likes: 11,
+
+      method: "POST",
+      header: {
+        'content-type': "application/x-www-form-urlencoded"
       },
-      {
-        face_url: "/images/like_light.png",
-        username: "AOQQ",
-        send_timestamp: "2020-2-26 21:34",
-        content: "just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. 333333333",
-        total_likes: 56,
+      success(res) {
+        //console.log(res.data)
+        if (res.data.error_code != 0) {
+          wx.showModal({
+            title: '？？？',
+            content: '遇到神秘错误: 代号' + res.data.error_code + ': ' + res.data.msg + '，快通知老猪！',
+            showCancel: false,
+            success(res) { },
+          })
+        } else if (res.data.error_code == 0) {
+          wx.showModal({
+            title: '发布成功',
+            content: '慢点按确定，给老猪留点时间帮你清理缓存',
+            showCancel: false,
+            success(res) { },
+            complete: function (res) {
+              wx.reLaunch({
+                url: '/pages/square/square'
+              })
+            }
+          })
+        }
       },
-      {
-        face_url: "/images/like_light.png",
-        username: "OPP",
-        send_timestamp: "2020-2-26 21:36",
-        content: "just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. 444444444444",
-        total_likes: 44,
+      fail: function (res) {
+        wx.showModal({
+          title: '糟糕',
+          content: '服务器傲娇了，请检查网络状态并督促老猪调教服务器',
+          showCancel: false,
+          success(res) { },
+        })
+      },
+      complete: function (res) {
+        wx.hideLoading()
       }
-    ]
+    })
   },
 
   first_select: function() {},
@@ -56,6 +77,57 @@ Page({
    */
   onLoad: function(options) {
 
+    var that = this
+
+    wx.showLoading({
+      title: '加载中',
+    })
+
+    console.log(that.data.detail)
+
+    //与服务器交互
+    wx.request({
+      url: getApp().globalData.server + '/index.php/home/message/get_all_messages',
+      data: {},
+
+      method: "POST",
+      header: {
+        'content-type': "application/x-www-form-urlencoded"
+      },
+      success(res) {
+        //console.log(res.data)
+        if (res.data.error_code != 0) {
+          wx.showModal({
+            title: '？？？',
+            content: '遇到神秘错误: 代号' + res.data.error_code + ': ' + res.data.msg + '，快通知老猪！',
+            showCancel: false,
+            success(res) {},
+          })
+        } else if (res.data.error_code == 0) {
+          // that.data.showdata = res.data.data不可用
+          // 因为赋值前页面就已渲染完成
+          // 重新赋值并不会触发刷新页面
+
+          // 应使用微信文档中的api触发刷新加载信息
+          that.setData({
+            showdata: res.data.data
+          })
+
+          console.log(that.data.showdata)
+        }
+      },
+      fail: function(res) {
+        wx.showModal({
+          title: '糟糕',
+          content: '服务器傲娇了，请检查网络状态并督促老猪调教服务器',
+          showCancel: false,
+          success(res) {},
+        })
+      },
+      complete: function(res) {
+        wx.hideLoading()
+      }
+    })
   },
 
   /**

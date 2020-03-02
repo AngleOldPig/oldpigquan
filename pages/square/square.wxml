@@ -1,6 +1,6 @@
 <!--pages/square/square.wxml-->
 <scroll-view class="scbg" scroll-y='true'>
-  <block wx:for="{{list}}" wx:for-item="itemName" wx:for-index="id">
+  <block wx:for="{{showdata}}" wx:for-item="itemName" wx:for-index="id">
     <view class="box">
       <view class="firstblock">
         <image class="face" src="{{itemName.face_url}}"></image>
@@ -17,8 +17,8 @@
         <text class="content">{{itemName.content}}</text>
       </view>
       <view class="thirdblock">
-        <image class="like" src='/images/like_dark.png'></image>
-        <text class="likenumber">{{itemName.total_likes}}</text>
+        <image class="like" src='/images/like_dark.png' bindtap="like"></image>
+        <text class="likenumber" wx:if="{{itemName.total_likes !=0}}">{{itemName.total_likes}}</text>
       </view>
     </view>
   </block>

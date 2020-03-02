@@ -175,7 +175,7 @@ Page({
           } else if (res.data.error_code != 0) {
             wx.showModal({
               title: '？？？',
-              content: '遇到神秘错误:' + res.data.msg + '，快通知老猪！',
+              content: '遇到神秘错误: 代号' + res.data.error_code + ': ' + res.data.msg + '，快通知老猪！',
               showCancel: false,
               success(res) {},
             })
