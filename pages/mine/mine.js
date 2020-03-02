@@ -7,35 +7,68 @@ Page({
   data: {
     firstcolor: "#979797",
     secondcolor: "#000000",
-    list: [{
-        face_url: "/images/new.png",
-        username: "AOP",
-        send_timestamp: "2020-2-26 21:31",
-        content: "just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. ",
-        total_likes: 32,
+    showdata: {},
+  },
+
+  delete_message: function(e) {
+    var that = this
+
+    //console.log(e)
+
+    wx.showModal({
+      title: '确认删除？',
+      content: '大王杀不杀？？',
+      success(res) {
+        if (res.confirm) {
+          wx.request({
+            url: getApp().globalData.server + '/index.php/home/message/delete_message',
+            data: {
+              user_id: getApp().globalData.user.user_id,
+              message_id: e.target.id,
+            },
+            method: "POST",
+            header: {
+              'content-type': "application/x-www-form-urlencoded"
+            },
+            success(res) {
+              //console.log(res.data)
+              if (res.data.error_code == 2) {
+                wx.showModal({
+                  title: '消息不存在',
+                  content: '是不是已经被删除了？',
+                  showCancel: false,
+                  success(res) {},
+                })
+              } else if (res.data.error_code != 0) {
+                wx.showModal({
+                  title: '？？？',
+                  content: '遇到神秘错误: 代号' + res.data.error_code + ': ' + res.data.msg + '，快通知老猪！',
+                  showCancel: false,
+                  success(res) {},
+                })
+              } else if (res.data.error_code == 0) {
+                wx.showModal({
+                  title: '删除成功',
+                  content: '不要停下来啊！ (指点赞',
+                  showCancel: false,
+                  success(res) {},
+                })
+              }
+            },
+            fail: function(res) {
+              wx.showModal({
+                title: '糟糕',
+                content: '服务器傲娇了，请检查网络状态并督促老猪调教服务器',
+                showCancel: false,
+                success(res) {},
+              })
+            },
+            complete: function(res) {}
+          })
+          wx.startPullDownRefresh()
+        }
       },
-      {
-        face_url: "/images/like_dark.png",
-        username: "AOQ",
-        send_timestamp: "2020-2-26 21:33",
-        content: "just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. 22222222222",
-        total_likes: 11,
-      },
-      {
-        face_url: "/images/like_light.png",
-        username: "AOQQ",
-        send_timestamp: "2020-2-26 21:34",
-        content: "just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. 333333333",
-        total_likes: 56,
-      },
-      {
-        face_url: "/images/like_light.png",
-        username: "OPP",
-        send_timestamp: "2020-2-26 21:36",
-        content: "just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. just test my first mp. 444444444444",
-        total_likes: 44,
-      }
-    ]
+    })
   },
 
   first_select: function() {
@@ -57,7 +90,61 @@ Page({
    */
   onLoad: function(options) {
 
+    var that = this
+
+    wx.showLoading({
+      title: '加载中',
+    })
+
+    console.log(that.data.detail)
+
+    //与服务器交互
+    wx.request({
+      url: getApp().globalData.server + '/index.php/home/message/get_one_user_all_messages',
+      data: {
+        user_id: getApp().globalData.user.user_id,
+      },
+
+      method: "POST",
+      header: {
+        'content-type': "application/x-www-form-urlencoded"
+      },
+      success(res) {
+        //console.log(res.data)
+        if (res.data.error_code != 0) {
+          wx.showModal({
+            title: '？？？',
+            content: '遇到神秘错误: 代号' + res.data.error_code + ': ' + res.data.msg + '，快通知老猪！',
+            showCancel: false,
+            success(res) {},
+          })
+        } else if (res.data.error_code == 0) {
+          // that.data.showdata = res.data.data不可用
+          // 因为赋值前页面就已渲染完成
+          // 重新赋值并不会触发刷新页面
+
+          // 应使用微信文档中的api触发刷新加载信息
+          that.setData({
+            showdata: res.data.data
+          })
+
+          console.log(that.data.showdata)
+        }
+      },
+      fail: function(res) {
+        wx.showModal({
+          title: '糟糕',
+          content: '服务器傲娇了，请检查网络状态并督促老猪调教服务器',
+          showCancel: false,
+          success(res) {},
+        })
+      },
+      complete: function(res) {
+        wx.hideLoading()
+      }
+    })
   },
+
 
   /**
    * 生命周期函数--监听页面初次渲染完成

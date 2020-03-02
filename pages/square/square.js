@@ -11,11 +11,37 @@ Page({
   },
 
   like: function(e) {
+    var that = this
+
+    // 在showdata数组中增加点赞标识
+    var showdata = this.data.showdata
+    for (var i = 0; i < showdata.length; i++) {
+      if (showdata[i].id == e.target.id){
+        if(showdata[i].islike == 1){
+          wx.showModal({
+            title: '点过赞啦',
+            content: '不能更赞了',
+            showCancel: false,
+            success(res) { },
+          })
+        }else{
+          showdata[i].total_likes++
+          showdata[i].islike = 1
+
+          that.setData({
+            showdata: showdata
+          })
+          
+        }
+      }
+    }
+
+    //console.log(e)
     wx.request({
       url: getApp().globalData.server + '/index.php/home/message/do_like',
       data: {
         user_id: getApp().globalData.user.user_id,
-        message_id: getApp().globalData.user.username,
+        message_id: e.target.id,
       },
 
       method: "POST",
@@ -29,33 +55,28 @@ Page({
             title: '？？？',
             content: '遇到神秘错误: 代号' + res.data.error_code + ': ' + res.data.msg + '，快通知老猪！',
             showCancel: false,
-            success(res) { },
+            success(res) {},
           })
         } else if (res.data.error_code == 0) {
+          
+
           wx.showModal({
-            title: '发布成功',
-            content: '慢点按确定，给老猪留点时间帮你清理缓存',
+            title: '点赞成功',
+            content: '不要停下来啊！ (指点赞',
             showCancel: false,
-            success(res) { },
-            complete: function (res) {
-              wx.reLaunch({
-                url: '/pages/square/square'
-              })
-            }
+            success(res) {},
           })
         }
       },
-      fail: function (res) {
+      fail: function(res) {
         wx.showModal({
           title: '糟糕',
           content: '服务器傲娇了，请检查网络状态并督促老猪调教服务器',
           showCancel: false,
-          success(res) { },
+          success(res) {},
         })
       },
-      complete: function (res) {
-        wx.hideLoading()
-      }
+      complete: function(res) {}
     })
   },
 

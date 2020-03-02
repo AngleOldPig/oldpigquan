@@ -10,7 +10,7 @@
     </view>
   </view>
 
-  <block wx:for="{{list}}" wx:for-item="itemName" wx:for-index="id">
+  <block wx:for="{{showdata}}" wx:for-item="itemName" wx:for-index="id">
     
     <view class="box">
 
@@ -26,9 +26,9 @@
       </view>
 
       <view class="thirdblock">
-        <image class="like" src='/images/like_dark.png'></image>
+        <image class="like" src='/images/like_light.png'></image>
         <text class="likenumber">{{itemName.total_likes}}</text>
-        <view class='del'>删除</view>
+        <view class='del' id="{{itemName.id}}" data-id="{{itemName.id}}" bindtap="delete_message">删除</view>
       </view>
 
     </view>

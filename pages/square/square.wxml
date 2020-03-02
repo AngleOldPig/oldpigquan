@@ -17,7 +17,7 @@
         <text class="content">{{itemName.content}}</text>
       </view>
       <view class="thirdblock">
-        <image class="like" src='/images/like_dark.png' bindtap="like"></image>
+        <image class="like" src="{{itemName.islike == 1 ? '/images/like_light.png' : '/images/like_dark.png'}}" bindtap="like" id="{{itemName.id}}" data-id="{{itemName.id}}"></image>
         <text class="likenumber" wx:if="{{itemName.total_likes !=0}}">{{itemName.total_likes}}</text>
       </view>
     </view>
