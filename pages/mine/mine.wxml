@@ -11,12 +11,12 @@
   </view>
 
   <block wx:for="{{showdata}}" wx:for-item="itemName" wx:for-index="id">
-    
+
     <view class="box">
 
       <view class="firstblock">
-      <text class="content">{{itemName.content}}</text>
-        
+        <text class="content">{{itemName.content}}</text>
+
       </view>
 
       <view class="secondblock">

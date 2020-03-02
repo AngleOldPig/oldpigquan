@@ -39,78 +39,42 @@ Page({
         title: '给个手机号呗',
         content: '快把手机号填上',
         showCancel: false,
-        success(res) {
-          // if (res.confirm) {
-          //   console.log('用户点击确定')
-          // } else if (res.cancel) {
-          //   console.log('用户点击取消')
-          // }
-        }
+        success(res) {}
       })
     } else if (that.data.phonenumber.length != 11) {
       wx.showModal({
         title: '啧...你这手机号不对呀',
         content: '手机号长度不对，回去重新输入',
         showCancel: false,
-        success(res) {
-          // if (res.confirm) {
-          //   console.log('用户点击确定')
-          // } else if (res.cancel) {
-          //   console.log('用户点击取消')
-          // }
-        }
+        success(res) {}
       })
     } else if (!checkNumber.test(that.data.phonenumber)) {
       wx.showModal({
         title: '啧...你这手机号假的吧',
         content: '手机号写错了，回去输入正确的',
         showCancel: false,
-        success(res) {
-          // if (res.confirm) {
-          //   console.log('用户点击确定')
-          // } else if (res.cancel) {
-          //   console.log('用户点击取消')
-          // }
-        }
+        success(res) {}
       })
     } else if (that.data.password == '') {
       wx.showModal({
         title: '乖~ 告诉我密码',
         content: '快把登录密码填上',
         showCancel: false,
-        success(res) {
-          // if (res.confirm) {
-          //   console.log('用户点击确定')
-          // } else if (res.cancel) {
-          //   console.log('用户点击取消')
-          // }
-        }
+        success(res) {}
       })
     } else if (that.data.passwordack == '') {
       wx.showModal({
         title: '休想偷懒！',
         content: '在确认密码里再输入一遍密码，让我来看看你记住了没',
         showCancel: false,
-        success(res) {
-          // if (res.confirm) {
-          //   console.log('用户点击确定')
-          // } else if (res.cancel) {
-          //   console.log('用户点击取消')
-          // }
-        }
+        success(res) {}
       })
     } else if (that.data.passwordack != that.data.password) {
       wx.showModal({
         title: '？？？',
         content: '两次输入密码不一致，快回去检查',
         showCancel: false,
-        success(res) {
-          // if (res.confirm) {
-          //   console.log('用户点击确定')
-          // } else if (res.cancel) {
-          //   console.log('用户点击取消')
-          // }
-        }
+        success(res) {}
       })
     } else {
       //console.log(that.data.username)
@@ -123,7 +87,7 @@ Page({
           face_url: getApp().globalData.userInfo.avatarUrl,
           password_again: that.data.passwordack,
         },
-        
+
         method: "POST",
         header: {
           'content-type': "application/x-www-form-urlencoded"
@@ -179,7 +143,7 @@ Page({
               showCancel: false,
               success(res) {},
             })
-          } else if (res.data.error_code == 0){
+          } else if (res.data.error_code == 0) {
             getApp().globalData.user = res.data.data
             //console.log(getApp().globalData.user)
             wx.showModal({
@@ -195,12 +159,12 @@ Page({
             })
           }
         },
-        fail:function(res){
+        fail: function(res) {
           wx.showModal({
             title: '糟糕',
             content: '服务器傲娇了，请检查网络状态并督促老猪调教服务器',
             showCancel: false,
-            success(res) { },
+            success(res) {},
           })
         }
       })

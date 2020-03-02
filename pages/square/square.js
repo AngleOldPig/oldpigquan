@@ -14,24 +14,18 @@ Page({
     var that = this
 
     // 在showdata数组中增加点赞标识
-    var showdata = this.data.showdata
+    var showdata = that.data.showdata
     for (var i = 0; i < showdata.length; i++) {
-      if (showdata[i].id == e.target.id){
-        if(showdata[i].islike == 1){
+      if (showdata[i].id == e.target.id) {
+        if (showdata[i].islike == 1) {
           wx.showModal({
             title: '点过赞啦',
             content: '不能更赞了',
             showCancel: false,
-            success(res) { },
+            success(res) {},
           })
-        }else{
-          showdata[i].total_likes++
-          showdata[i].islike = 1
+        } else {
 
-          that.setData({
-            showdata: showdata
-          })
-          
         }
       }
     }
@@ -49,6 +43,8 @@ Page({
         'content-type': "application/x-www-form-urlencoded"
       },
       success(res) {
+
+
         //console.log(res.data)
         if (res.data.error_code != 0) {
           wx.showModal({
@@ -58,7 +54,18 @@ Page({
             success(res) {},
           })
         } else if (res.data.error_code == 0) {
-          
+
+          var showdata = that.data.showdata
+          for (var i = 0; i < showdata.length; i++) {
+            if (showdata[i].id == e.target.id) {
+              showdata[i].total_likes++
+              showdata[i].islike = 1
+
+              that.setData({
+                showdata: showdata
+              })
+            }
+          }
 
           wx.showModal({
             title: '点赞成功',

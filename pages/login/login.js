@@ -18,18 +18,27 @@ Page({
   signIn: function(e) {
     var that = this
     //检查内容是否填全
+    var checkNumber = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/
     if (that.data.phonenumber == '') {
       wx.showModal({
         title: '来者何人？',
         content: '快把手机号填上',
         showCancel: false,
-        success(res) {
-          // if (res.confirm) {
-          //   console.log('用户点击确定')
-          // } else if (res.cancel) {
-          //   console.log('用户点击取消')
-          // }
-        }
+        success(res) {}
+      })
+    } else if (that.data.phonenumber.length != 11) {
+      wx.showModal({
+        title: '啧...你这手机号不对呀',
+        content: '手机号长度不对，回去重新输入',
+        showCancel: false,
+        success(res) {}
+      })
+    } else if (!checkNumber.test(that.data.phonenumber)) {
+      wx.showModal({
+        title: '啧...你这手机号假的吧',
+        content: '手机号写错了，回去输入正确的',
+        showCancel: false,
+        success(res) {}
       })
     } else if (that.data.password == '') {
       wx.showModal({
@@ -110,12 +119,12 @@ Page({
             })
           }
         },
-        fail: function (res) {
+        fail: function(res) {
           wx.showModal({
             title: '糟糕',
             content: '服务器傲娇了，请检查网络状态并督促老猪调教服务器',
             showCancel: false,
-            success(res) { },
+            success(res) {},
           })
         }
       })
