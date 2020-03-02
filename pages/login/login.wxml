@@ -8,6 +8,6 @@
   </view>
   <view class="click" bindtap="signIn">登录</view>
   <view class="signUp">
-    <text class="clickMe" bindtap="signUp">还没有账号？点我登录</text>
+    <text class="clickMe" bindtap="signUp">还没有账号？点我注册</text>
   </view>
 </view>

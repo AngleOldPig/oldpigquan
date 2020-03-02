@@ -49,7 +49,7 @@ Page({
               } else if (res.data.error_code == 0) {
                 wx.showModal({
                   title: '删除成功',
-                  content: '不要停下来啊！ (指点赞',
+                  content: '可以停下来了',
                   showCancel: false,
                   success(res) {},
                 })
@@ -65,7 +65,9 @@ Page({
             },
             complete: function(res) {}
           })
-          wx.startPullDownRefresh()
+          wx.reLaunch({
+            url: '/pages/mine/mine'
+          })
         }
       },
     })

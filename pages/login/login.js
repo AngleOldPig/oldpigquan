@@ -45,13 +45,7 @@ Page({
         title: '乖~ 告诉我密码',
         content: '快把登录密码也填上',
         showCancel: false,
-        success(res) {
-          // if (res.confirm) {
-          //   console.log('用户点击确定')
-          // } else if (res.cancel) {
-          //   console.log('用户点击取消')
-          // }
-        }
+        success(res) {}
       })
     } else {
       console.log("success")
