@@ -14,21 +14,21 @@ Page({
     var that = this
 
     // 在showdata数组中增加点赞标识
-    var showdata = that.data.showdata
-    for (var i = 0; i < showdata.length; i++) {
-      if (showdata[i].id == e.target.id) {
-        if (showdata[i].islike == 1) {
-          wx.showModal({
-            title: '点过赞啦',
-            content: '不能更赞了',
-            showCancel: false,
-            success(res) {},
-          })
-        } else {
+    // var showdata = that.data.showdata
+    // for (var i = 0; i < showdata.length; i++) {
+    //   if (showdata[i].id == e.target.id) {
+    //     if (showdata[i].islike == 1) {
+    //       wx.showModal({
+    //         title: '点过赞啦',
+    //         content: '不能更赞了',
+    //         showCancel: false,
+    //         success(res) {},
+    //       })
+    //     } else {
 
-        }
-      }
-    }
+    //     }
+    //   }
+    // }
 
     //console.log(e)
     wx.request({
