@@ -67,11 +67,17 @@ Page({
             }
           }
 
-          wx.showModal({
-            title: '点赞成功',
-            content: '不要停下来啊！ (指点赞',
-            showCancel: false,
-            success(res) {},
+          // wx.showModal({
+          //   title: '点赞成功',
+          //   content: '不要停下来啊！ (指点赞',
+          //   showCancel: false,
+          //   success(res) {},
+          // })
+
+          wx.showToast({
+            title: '不要停下来啊！',
+            icon: 'success',
+            duration: 1500
           })
         }
       },
